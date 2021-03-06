@@ -3,8 +3,10 @@
 (defun emx/gamebase ()
   "Return path to where emacks-attacks base elisp lives"
   (interactive)
-  (concat user-emacs-directory "/" *emx/basepath* ))
-
+  (f-dirname (or load-file-name (buffer-file-name)))
+  ;; (concat user-emacs-directory "/" *emx/basepath* ))
+)
+  
 (defun emx/gamespath ()
   "Return path to where emacks-attacks games subdirs are located"
   (interactive)

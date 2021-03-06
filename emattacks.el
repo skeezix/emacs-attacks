@@ -38,7 +38,6 @@
 (load-file "libkeys.el")
 
 ;; configuration
-(defvar *emx/basepath* "emattacks" "path to add to the .emacs.d location to find emacs attacks dir")
 (defvar *emx/gamespath* "games" "path to append to emx/basepath to find where game modules are located")
 (defvar *emx/bufname* "*EmacsAttacks!*" "Emacs Attacks! - buffer name to utilize")
 (defvar *emx/panelname* "*EmacsAttacksPanel*" "Emacs Attacks! - buffer name for side panel")
