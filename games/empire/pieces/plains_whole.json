@@ -1,0 +1,10 @@
+{
+    "name": "plains full",
+    "id": "plnf",
+    "stance": {
+	"rest": {
+	    "icon": "artwork/foop/plains-full-42-freeciv.png",
+	    "text": "."
+	}
+    }
+}

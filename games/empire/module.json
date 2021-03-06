@@ -1,0 +1,7 @@
+{
+    "name": "Attacks!",
+    "elisp": "module.el",
+    "init": "emx/a-init-module",
+    "initargs": null,
+    "start": "emx/a-start-module"
+}

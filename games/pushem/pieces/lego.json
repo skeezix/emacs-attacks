@@ -1,0 +1,9 @@
+{
+    "name": "Lego Piece",
+    "stance": {
+	"rest": {
+	    "icon": "artwork/pixel-art-banana-icon-32x32-vector-30731187.jpg",
+	    "text: "m"
+	}
+    }
+}

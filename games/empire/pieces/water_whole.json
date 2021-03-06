@@ -1,0 +1,10 @@
+{
+    "name": "water full",
+    "id": "watf",
+    "stance": {
+	"rest": {
+	    "icon": "artwork/foop/water-full-42-freeciv.png",
+	    "text": "."
+	}
+    }
+}

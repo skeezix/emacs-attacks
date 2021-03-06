@@ -1,0 +1,10 @@
+{
+    "name": "mountain full",
+    "id": "mowf",
+    "stance": {
+	"rest": {
+	    "icon": "artwork/foop/mountain-full-42-freeciv.png",
+	    "text": "."
+	}
+    }
+}

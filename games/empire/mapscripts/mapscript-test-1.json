@@ -1,0 +1,6 @@
+{
+    "name": "simple test script",
+    "id": "test-1",
+    "elisp": "mapscripts/mapscript-tests.el",
+    "start": "emx/map-script-test-1"
+}

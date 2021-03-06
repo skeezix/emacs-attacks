@@ -1,0 +1,10 @@
+{
+    "name": "grass full",
+    "id": "grsf",
+    "stance": {
+	"rest": {
+	    "icon": "artwork/foop/grass-full-42-freeciv.png",
+	    "text": "."
+	}
+    }
+}

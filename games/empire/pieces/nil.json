@@ -1,0 +1,10 @@
+{
+    "name": "nil",
+    "id": "nil",
+    "stance": {
+	"rest": {
+	    "icon": "artwork/nil.png",
+	    "text": "?"
+	}
+    }
+}

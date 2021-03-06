@@ -1,0 +1,10 @@
+{
+    "name": "trees full",
+    "id": "tref",
+    "stance": {
+	"rest": {
+	    "icon": "artwork/foop/trees-full-42-freeciv.png",
+	    "text": "."
+	}
+    }
+}

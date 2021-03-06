@@ -1,0 +1,10 @@
+{
+    "name": "tank blue base",
+    "id": "tnkb",
+    "stance": {
+	"rest": {
+	    "icon": "artwork/tank-42-blue-base.png",
+	    "text": "."
+	}
+    }
+}

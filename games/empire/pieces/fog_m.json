@@ -1,0 +1,10 @@
+{
+    "name": "fog middle-of-3x3",
+    "id": "fogm",
+    "stance": {
+	"rest": {
+	    "icon": "artwork/fog_m.png",
+	    "text": "."
+	}
+    }
+}
