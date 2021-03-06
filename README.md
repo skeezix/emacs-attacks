@@ -4,6 +4,7 @@ Simple top-down wargame for Emacs
 Why:
 - .. because we needed a wargame in Emacs right? People can't complain there isn't one anymore!
 - I wanted to learn Lisp and elisp in particular; failed spectacularly - this is not written in idiomatic lisp, and uses all terrible conventions. Thats what you get when hacking round at 2am .. but it works :)
+- inspired by Empire - Wargame of the Century (Walter Bright, mid 1980s)
 
 How to run:
 - Clone the git or otherwise unpack to somewhere
