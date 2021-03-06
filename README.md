@@ -5,6 +5,21 @@ Why:
 - .. because we needed a wargame in Emacs right? People can't complain there isn't one anymore!
 - I wanted to learn Lisp and elisp in particular; failed spectacularly - this is not written in idiomatic lisp, and uses all terrible conventions. Thats what you get when hacking round at 2am .. but it works :)
 
+How to run:
+- Clone the git or otherwise unpack to somewhere
+- Open up emattacks.el
+- M-x eval-buffer
+- .. "game" should be running
+
+What does it do?
+- as of Feb 2021, it just draws a lame map in its buffer, and a fake side-panel, and lets you cursor around
+- immediate priorities are properly handlig the 'sprite list' (NPC and PC movable units, as opposed to map tiles); a few strategies for display (text properties? posframes? just replace map tile with the 'sprite' art..)
+- proper side panel content and menus
+- map painting, saving and loading
+- hook people into working on mapscripts and AI scripts (bresenham bee line AI isn't very useful, especially with water in the way)
+- large map handling (scrolling the map viewport, not actually the buffer.. rendering this many small images slows down Emacs when its a huge map!)
+- etc
+
 Contributing:
 - all are welcome!
 - check the license - currently aiming for GPLv3 on all assets for maximum compatibility with Emacs itself
