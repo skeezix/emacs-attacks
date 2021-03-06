@@ -18,7 +18,36 @@ What does it do?
 - map painting, saving and loading
 - hook people into working on mapscripts and AI scripts (bresenham bee line AI isn't very useful, especially with water in the way)
 - large map handling (scrolling the map viewport, not actually the buffer.. rendering this many small images slows down Emacs when its a huge map!)
-- etc
+Detail todo from Feb 2021:
+```elisp
+;; - re-render after key/function
+;; - render sprite-list for PC and NPC
+;; - cursor around; select single unit
+;; - key actions
+;; - populate side panel correctly per unit
+;; - end of turn handler
+;; - map paint + save mode
+;; - map loading
+;; - FARM OUT: AI scripts
+;; - FARM OUT: art
+;; - FARM OUT: mapscripts
+;; - large map scrolling
+;; - combat resolution
+;; - additional units
+;; - production queue
+;; - AI register function, set state personality
+;; - AI function invoke
+;; - game profiles vs start emattacks -> pick module -> pick map size -> mapscript choice -> then proceed?
+;;   - proper module picker
+;;   - proper size picker
+;;   - proper mapscript picker
+;; - refactor module code to base package code for cross-module mojination
+;; - add hooks? modding methods
+;; - add config functions (paths to modules, mapscripts, pieces, etc..)
+;; - timer to adv-turn + re-render
+;; - rectangle select a group of units? or assign units to a name, and select group by name?
+```
+
 
 Contributing:
 - all are welcome!
