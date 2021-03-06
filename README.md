@@ -18,3 +18,4 @@ Required packages:
 To Do:
 - much is to be done, this is very rudimentary so far!
 
+![Rudimentary first screenshot](./screenshots/emattacks-alpha-001.png)
