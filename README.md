@@ -18,6 +18,7 @@ What does it do?
 - map painting, saving and loading
 - hook people into working on mapscripts and AI scripts (bresenham bee line AI isn't very useful, especially with water in the way)
 - large map handling (scrolling the map viewport, not actually the buffer.. rendering this many small images slows down Emacs when its a huge map!)
+
 Detail todo from Feb 2021:
 ```elisp
 ;; - re-render after key/function
