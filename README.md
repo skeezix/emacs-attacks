@@ -19,7 +19,32 @@ What does it do?
 - hook people into working on mapscripts and AI scripts (bresenham bee line AI isn't very useful, especially with water in the way)
 - large map handling (scrolling the map viewport, not actually the buffer.. rendering this many small images slows down Emacs when its a huge map!)
 
+Contributing:
+- all are welcome!
+- check the license - currently aiming for GPLv3 on all assets for maximum compatibility with Emacs itself
+- we especially need the following I think:
+  - Artists - I've swiped some tiles from Freeciv for now (I believe GPLv3 but didn't keep notes), so I'd like to replace the tiles with new art so we're not in question of ownership
+  - elisp - Mapscripts need writing, to generate fresh maps rather than the dumb demo ones I've made
+  - elisp - AI scripts for the NPC units
+
+Emacs version:
+- Tested on Emacs 27.1
+- Currently requires GUI mode Emacs, until we fix/write the text interface
+
+Required packages:
+- posframe
+- ..
+
+Screenshots:
+
+- very first alpha screenshot
+![Rudimentary first screenshot](./screenshots/emattacks-alpha-001.png)
+
+To Do:
+- much is to be done, this is very rudimentary so far! Not worth listing what is to do, because far more needs to be done than is done!
+
 Detail todo from Feb 2021:
+
 ```elisp
 ;; - re-render after key/function
 ;; - render sprite-list for PC and NPC
@@ -48,28 +73,3 @@ Detail todo from Feb 2021:
 ;; - timer to adv-turn + re-render
 ;; - rectangle select a group of units? or assign units to a name, and select group by name?
 ```
-
-
-Contributing:
-- all are welcome!
-- check the license - currently aiming for GPLv3 on all assets for maximum compatibility with Emacs itself
-- we especially need the following I think:
-  - Artists - I've swiped some tiles from Freeciv for now (I believe GPLv3 but didn't keep notes), so I'd like to replace the tiles with new art so we're not in question of ownership
-  - elisp - Mapscripts need writing, to generate fresh maps rather than the dumb demo ones I've made
-  - elisp - AI scripts for the NPC units
-
-Emacs version:
-- Tested on Emacs 27.1
-- Currently requires GUI mode Emacs, until we fix/write the text interface
-
-Required packages:
-- posframe
-- ..
-
-To Do:
-- much is to be done, this is very rudimentary so far! Not worth listing what is to do, because far more needs to be done than is done!
-
-Screenshots:
-
-- very first alpha screenshot
-![Rudimentary first screenshot](./screenshots/emattacks-alpha-001.png)
