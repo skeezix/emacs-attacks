@@ -40,7 +40,6 @@
 ;; configuration
 (defvar *emx/gamespath* "games" "path to append to emx/basepath to find where game modules are located")
 (defvar *emx/bufname* "*EmacsAttacks!*" "Emacs Attacks! - buffer name to utilize")
-(defvar *emx/panelname* "*EmacsAttacksPanel*" "Emacs Attacks! - buffer name for side panel")
 
 ;; state - surely I'm doing this wrong, having globals like this :)
 (defvar *emx/gamemodes* nil "Emacs Attacks! - list of game modes and particulars about them")

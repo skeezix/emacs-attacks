@@ -55,7 +55,7 @@
   (use-local-map emattacks-mode-map)
 
   ;; enable side panel
-  (emx/side-panel-init)
+  (emx/show-side-panel)
   (emx/refresh-side-panel (emx/a-describe-unit))
  
   t
