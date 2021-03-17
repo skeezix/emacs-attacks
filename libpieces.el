@@ -70,3 +70,20 @@
     plist
   ) ; let
 )
+
+(defun emx/get-pieces-image (piececode)
+  "Return the image .. or nil if no image found"
+
+  (let (asset cachedimage)
+
+    (setq asset (gethash id artcache))
+    ;;(message "%d %d %s" x y id)
+
+    ;; an item in the map .. look it up in the hash?
+    (if asset
+	(setq cachedimage (cdr (assoc-string "_icon" (assoc-string "rest" (assoc-string "stance" asset)))))
+      nil
+    )
+  ) ; let
+
+)

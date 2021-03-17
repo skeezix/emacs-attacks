@@ -20,11 +20,12 @@
   (load-file (concat path "/" "render.el"))
   (load-file (concat path "/" "sidepanel.el"))
 
-  (let* ( (config_w 28)
+  (let* ( (config_w 22)
 	  (config_h 20)
 	  board
 	  piecehash
 	  state
+	  vp
 	)
 
     ;; build a board
@@ -32,9 +33,13 @@
 
     ;; load up all the pieces
     (setq piecehash (emx/inhale-module-pieces path "pieces"))
+    ;;(print piecehash)
+
+    ;; set up a viewport
+    (setq vp '(0 0 12 12) )
 
     ;; build a state, assigning in the board and assets
-    (setq state (emx/a-state :board board :guip (display-images-p) :artcache piecehash ))
+    (setq state (emx/a-state :board board :guip (display-images-p) :artcache piecehash :viewport vp ))
 
     ;;(message "Board internal")
     ;;(print board)

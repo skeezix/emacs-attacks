@@ -1,18 +1,20 @@
 ;;;; Emacs Attacks! - base elisp file; this is the one that kicks it all off
 
 ;; TODO
+;; - large map scrolling
 ;; - re-render after key/function
-;; - render sprite-list for PC and NPC
-;; - cursor around; select single unit
-;; - key actions
-;; - populate side panel correctly per unit
-;; - end of turn handler
 ;; - map paint + save mode
 ;; - map loading
+;; - mapscript or two?
+;; - cursor around; select single unit
+;; - render sprite-list for PC and NPC
+;; - key actions
+;; - refactor .. code to single concern; and why is module defining viewport size? mapscripts hardcoded?..etc
+;; - populate side panel correctly per unit
+;; - end of turn handler
 ;; - FARM OUT: AI scripts
 ;; - FARM OUT: art
 ;; - FARM OUT: mapscripts
-;; - large map scrolling
 ;; - combat resolution
 ;; - additional units
 ;; - production queue
@@ -42,7 +44,7 @@
 (defvar *emx/bufname* "*EmacsAttacks!*" "Emacs Attacks! - buffer name to utilize")
 
 ;; state - surely I'm doing this wrong, having globals like this :)
-(defvar *emx/gamemodes* nil "Emacs Attacks! - list of game modes and particulars about them")
+(defvar *emx/gamemodes* nil "Emacs Attacks! - list of game modes and particulars about them.")
 
 ;; register available game modes
 (setq *emx/gamemodes* (emx/list-game-modes))
@@ -53,6 +55,7 @@
 ;; define the major mode for the windows
 ;; - special-mode is immutable by default
 (define-derived-mode emattacks-mode special-mode "emattacks-mode"
+  "Mode for Emacs Attacks! to use in main game window"
   (use-local-map emattacks-mode-map) ; doesn't seem to work .. apply it during render I guess :/
 )
 
@@ -62,6 +65,7 @@
 ;; (emx/a-state-print *emx/gamestate*)
 
 ;; register all the mapscripts we can find for this module (including loading their elisp)
+(defvar *emx/selected-mapscript* nil "Emacs Attacks! - mapscript tp use for current session")
 (setq *emx/selected-mapscript* (emx/register-mapscript-from-file "games/empire" "mapscripts/mapscript-test-1.json"))
 
 ;; invoke mapscript(s) to populate the board
@@ -73,8 +77,3 @@
 
 ;; (gethash "fogm" (emx/a-state-artcache *emx/gamestate*))
 ;; (posframe-delete-all)
-
-(defun emx/test-module ()
-  (interactive)
-  (emx/start-module *emx/gamestate*)
-)
