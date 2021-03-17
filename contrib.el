@@ -19,7 +19,7 @@
 
 ;;; Code:
 
-(defun foreach (alist func)
+(defun skeez/foreach-alist (alist func)
   (while alist
     (progn
       (funcall func (car alist))

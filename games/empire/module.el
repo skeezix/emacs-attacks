@@ -37,6 +37,7 @@
   (load-file (concat path "/" "map.el"))
   (load-file (concat path "/" "render.el"))
   (load-file (concat path "/" "sidepanel.el"))
+  (load-file (concat path "/" "units.el"))
 
   (let* ( (config_w 30)
 	  (config_h 30)
@@ -44,6 +45,7 @@
 	  piecehash
 	  state
 	  vp
+	  ulist
 	)
 
     ;; build a board
@@ -56,8 +58,19 @@
     ;; set up a viewport
     (setq vp '(0 0 24 20) )
 
+    ;; set up unitlist
+    (setq ulist '())
+
     ;; build a state, assigning in the board and assets
-    (setq state (emx/a-state :board board :guip (display-images-p) :artcache piecehash :viewport vp ))
+    (setq state (emx/a-state :board board :guip (display-images-p) :artcache piecehash :viewport vp :unitlist ulist ))
+
+    (let ( test )
+      (setq test (emx/a-create-unit state 0 "nil" 1 1))
+      (message "Found unit at 0 0?")
+      (print (emx/a-find-units-at state 0 0))
+      (message "Found unit at 1 1?")
+      (print (emx/a-find-units-at state 1 1))
+    )
 
     ;;(message "Board internal")
     ;;(print board)

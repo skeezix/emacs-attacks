@@ -21,7 +21,9 @@
 ;;; Code:
 
 ;; TODO
-;; - large map scrolling
+;; - add units
+;; - render units
+;; - blink option for units, to show selected units etc
 ;; - re-render after key/function
 ;; - map paint + save mode
 ;; - map loading

@@ -69,6 +69,8 @@
 	 cachedimage
        )
 
+    ;; strategy: which subset to render
+    ;;
     ;; given:
     ;; - a buffer of indeterminate window size; we don't care, we'll just render into it
     ;; - a viewpoint - the size we wish to render (can't render it all due to performance of emacs and a zillion small images)
@@ -97,6 +99,11 @@
     ;; ex: large map (12x10), small vp (5x5) -> ox = oy = 0
     ;;    repeat for 5 rows
     ;;      render 0 ox, then render 5 map cells
+    ;;
+
+    ;; strategy: unit 'sprites', blinking units
+    ;;
+    ;; TBD
     ;;
 
     (when t

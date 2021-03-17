@@ -21,14 +21,49 @@
 
 (defclass emx/a-unit ()
   (
-   (x       :initarg :x       :type integer :documentation "x coord on map" :accessor emx/a-unit-x :initform 0)
-   (y       :initarg :y       :type integer :documentation "y coord on map" :accessor emx/a-unit-y :initform 0)
-   (mapid   :initarg :mapid   :type integer :documentation "which map?" :accessor emx/a-unit-mapid :initform -1)
+   (playerid  :initarg :playerid :type integer :documentation "identify player id that owns unit" :accessor emx/a-unit-playerid :initform -1)
+   (x         :initarg :x       :type integer :documentation "x coord on map" :accessor emx/a-unit-x :initform 0)
+   (y         :initarg :y       :type integer :documentation "y coord on map" :accessor emx/a-unit-y :initform 0)
+   ;;(mapid   :initarg :mapid   :type integer :documentation "which map?" :accessor emx/a-unit-mapid :initform -1) ; keep it simple..
    ;;
-   (intent  :initarg :intent  :type string  :documentation "intent code" :accessor emx/a-unit-intent :initform "") ; ex: "move"
-   (goal    :initarg :goal    :type string  :documentation "a goal value meaningful to the intent code" :accessor emx/a-unit-goal :initform "")  ; target (x,y) for a move, say
+   (intent    :initarg :intent  :type string  :documentation "intent code" :accessor emx/a-unit-intent :initform "") ; ex: "move"
+   (goal      :initarg :goal    :type string  :documentation "a goal value meaningful to the intent code" :accessor emx/a-unit-goal :initform "")  ; target (x,y) for a move, say
+   (piececd   :initarg :piececd :type string  :documentation "the piece that to use for artwork" :accessor emx/a-unit-piece :initform "")
   )
-  "Emacs Attacks! - Attacks! map instance state"
+  "Emacs Attacks! - Unit for player or enemies"
+)
+
+(defun emx/a-create-unit ( state playerid piececd x y )
+  "Create a new unit, add it to the state"
+
+  (let ( unit
+	 ulist
+       )
+
+    (setq unit (emx/a-unit :piececd piececd :x x :y y :playerid playerid ))
+    (print unit)
+
+    (setq ulist (emx/a-state-unitlist state))
+    (message "ulist %s" ulist)
+    (message "poop")
+
+    (add-to-list ulist unit)
+
+    unit
+  ) ; let
+
+)
+
+(defun emx/a-find-units-at ( state x y ) 
+  "Return a list of units at the defined location, or nil"
+
+  (let ( (matches '()) )
+
+    (mapcan (emx/a-state-unitlist state)
+             (lambda (x) (message x)))
+    
+  ) ; let
+  
 )
 
 (defun emx/a-describe-unit ( state )
