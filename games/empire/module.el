@@ -1,5 +1,23 @@
+;;; emattacks.el --- A wargame for Emacs
 
-;;;; Emacs Attacks! .. "Attacks!" module
+;; Copyright (C) 2021 Jeff Mitchell
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;;; Code:
 
 ;; "starter": {
 ;; 	"method": "simplemenu",
@@ -20,8 +38,8 @@
   (load-file (concat path "/" "render.el"))
   (load-file (concat path "/" "sidepanel.el"))
 
-  (let* ( (config_w 22)
-	  (config_h 20)
+  (let* ( (config_w 30)
+	  (config_h 30)
 	  board
 	  piecehash
 	  state
@@ -36,7 +54,7 @@
     ;;(print piecehash)
 
     ;; set up a viewport
-    (setq vp '(0 0 12 12) )
+    (setq vp '(0 0 24 20) )
 
     ;; build a state, assigning in the board and assets
     (setq state (emx/a-state :board board :guip (display-images-p) :artcache piecehash :viewport vp ))
@@ -53,30 +71,15 @@
 (defun emx/a-start-module (state)
   "Given a module state object, render and get going"
 
+  ;; enable side panel
+  (emx/show-side-panel)
+
   ;; render to the buffer
   (emx/a-render state)
 
   ;; enable keymap
   (use-local-map emattacks-mode-map)
-
-  ;; enable side panel
-  (emx/show-side-panel)
-  (emx/refresh-side-panel (emx/a-describe-unit))
  
   t
 
-)
-
-(defun emx/a-describe-unit ()
-  "Return text describing selected unit"
-  (let ( (text "") )
-    ;; title
-    (setq text (concat text "Super Blahg Tank\n"))
-    (setq text (concat text "\n"))
-    (setq text (concat text "Location: (10,37) Plains\n"))
-    (setq text (concat text "\n"))
-    (setq text (concat text "[D]  Destroy unit\n"))
-    (setq text (concat text "[a]  Attack towards point\n"))
-    (setq text (concat text "[m]  Move towards point\n"))
-  )
 )

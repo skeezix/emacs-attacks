@@ -1,4 +1,24 @@
-;;;; Emacs Attacks! - base elisp file; this is the one that kicks it all off
+;;; emattacks.el --- A wargame for Emacs
+
+;; Copyright (C) 2021 Jeff Mitchell
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+;;; Commentary:
+;;; Emacs Attacks! - base elisp file; this is the one that kicks it all off
+
+;;; Code:
 
 ;; TODO
 ;; - large map scrolling
@@ -8,8 +28,8 @@
 ;; - mapscript or two?
 ;; - cursor around; select single unit
 ;; - render sprite-list for PC and NPC
-;; - key actions
-;; - refactor .. code to single concern; and why is module defining viewport size? mapscripts hardcoded?..etc
+;; - key actions .. and move game-specific key handling to the game module somewhere
+;; - refactor .. code to separation of concern; and why is module defining viewport size? mapscripts hardcoded?..etc
 ;; - populate side panel correctly per unit
 ;; - end of turn handler
 ;; - FARM OUT: AI scripts

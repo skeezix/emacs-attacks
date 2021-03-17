@@ -20,6 +20,9 @@ What does it do?
 - hook people into working on mapscripts and AI scripts (bresenham bee line AI isn't very useful, especially with water in the way)
 - large map handling (scrolling the map viewport, not actually the buffer.. rendering this many small images slows down Emacs when its a huge map!)
 
+How to play? (to be expanded upon once there is much to do..)
+- viewport - Emacs speed at rendering thousands of small images isn't great, so if your Emacs isn't performing well, or if you just prefer, you can set a smaller viewport size; the viewport is the region size of the map to render, and it can scroll around the map surface (assuming the viewport is smaller than the map.) The term viewport is chosen due to Emacs already using terms like window and frame in odd fashions.
+
 Contributing:
 - all are welcome!
 - check the license - currently aiming for GPLv3 on all assets for maximum compatibility with Emacs itself

@@ -1,3 +1,23 @@
+;;; emattacks.el --- A wargame for Emacs
+
+;; Copyright (C) 2021 Jeff Mitchell
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;;; Code:
 
 (defclass emx/a-state ()
   (
@@ -21,5 +41,28 @@
   ;; asst
   (message "GUI enabled? %s" (emx/a-state-gui-p obj))
   (message "Artwork cache: %s items" (hash-table-size (emx/a-state-artcache obj)))
+
+)
+
+(defun emx/a-describe-status ( state )
+
+  (let* ( (vp (emx/a-state-viewport *emx/gamestate*))
+	  (vpx (nth 0 vp))
+	  (vpy (nth 1 vp))
+	  (vpw (nth 2 vp))
+	  (vph (nth 3 vp))
+	  (board (emx/a-state-board *emx/gamestate*))
+	  (mw (emx/a-map-w board))
+	  (mh (emx/a-map-h board))
+	  ( text "" )
+	)
+  
+    (setq text (concat text (format "Viewport: %d,%d\n" vpx vpy)))
+    (setq text (concat text (format "Map dimensions: %d,%d\n" mw mh)))
+    (setq text (concat text "\n"))
+
+    text
+    
+  ) ; let
 
 )
