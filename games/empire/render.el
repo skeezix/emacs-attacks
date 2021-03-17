@@ -100,13 +100,13 @@
 		      (- (- vph oy) mh)
 		    0)) ;; vert back porch height
 	    )
-	(message "mw %s mh %s vpw %s vph %s ox %s oy %d" mw mh vpw vph ox oy)
+	;;(message "mw %s mh %s vpw %s vph %s ox %s oy %d" mw mh vpw vph ox oy)
 
 	;; render vertical front porch
 	(when oy
 	  (cl-loop for y from 0 to (1- oy) do
 		   (cl-loop for x from 0 to (1- vpw) do
-			    (message "vporch x %s y %s" x y)
+			    ;;(message "vporch x %s y %s" x y)
 			    (emx/a-render-piece-on-board board -1 -1 artcache "*" "_")
 		   )
 		   (insert "\n")
@@ -119,14 +119,14 @@
 		 ;; horizontal front porch
 		 (when ox
 		   (cl-loop for x from 0 to (1- ox) do
-			    (message "hporch x %s y %s" x y)
+			    ;;(message "hporch x %s y %s" x y)
 			    (emx/a-render-piece-on-board board -1 -1 artcache "*" "_")
 		   )
 		 ) ; when
 
 		 ;; render the cells
 		 (cl-loop for x from 0 to (1- (min vpw mw)) do
-			  (message "tile x %s y %s" x y)
+			  ;;(message "tile x %s y %s" x y)
 			  (emx/a-render-piece-on-board board (+ x vpx) (+ y vpy) artcache "*" "_")
 		 )
 
@@ -145,7 +145,7 @@
 	(when ph
 	  (cl-loop for y from 0 to (1- ph) do
 		   (cl-loop for x from 0 to (1- vpw) do
-			    (message "vporch x %s y %s" x y)
+			    ;;(message "vporch x %s y %s" x y)
 			    (emx/a-render-piece-on-board board -1 -1 artcache "*" "_")
 		   )
 		   (insert "\n")
