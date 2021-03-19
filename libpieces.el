@@ -96,7 +96,7 @@
 
   (let (asset cachedimage)
 
-    (setq asset (gethash id artcache))
+    (setq asset (gethash piececode artcache))
     ;;(message "%d %d %s" x y id)
 
     ;; an item in the map .. look it up in the hash?

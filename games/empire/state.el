@@ -28,6 +28,7 @@
    (startfunc :initarg :startfunc :documentation "function ref to invoke to start/render the module" :accessor emx/a-state-startfunc)
    (viewport :initarg :viewport :documentation "( x y w h ) of the window to show" :accessor emx/a-state-viewport)
    (unitlist :initarg :unitlist :documentation "A list of emx/a-unit objects" :accessor emx/a-state-unitlist)
+   (archhash :initarg :archhash :documentation "A list of emx/a-archetype available for units" :accessor emx/a-state-archhash)
   )
   "Emacs Attacks! - Attacks! module instance state"
 )

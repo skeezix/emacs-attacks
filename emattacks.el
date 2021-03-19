@@ -24,6 +24,7 @@
 ;; - add units
 ;; - render units
 ;; - blink option for units, to show selected units etc
+;; - move archetype definition from el to json for easier modding
 ;; - re-render after key/function
 ;; - map paint + save mode
 ;; - map loading
@@ -65,6 +66,16 @@
 (defvar *emx/gamespath* "games" "path to append to emx/basepath to find where game modules are located")
 (defvar *emx/bufname* "*EmacsAttacks!*" "Emacs Attacks! - buffer name to utilize")
 
+;; logging buffer
+(defvar *emx/logbufname* "*EmacsAttacks! Debug Log*" "Emacs Attacks! - buffer name to utilize for debug log")
+(defvar *emx/logbuf* nil "Emacs Attacks! - the actual debug log buffer")
+;;(setq *emx/logbuf* (generate-new-buffer *emx/logbufname*))
+(setq *emx/logbuf* (get-buffer-create *emx/logbufname*))
+(with-current-buffer *emx/logbufname*
+  (erase-buffer)
+)
+
+
 ;; state - surely I'm doing this wrong, having globals like this :)
 (defvar *emx/gamemodes* nil "Emacs Attacks! - list of game modes and particulars about them.")
 
@@ -98,4 +109,3 @@
 (emx/start-module *emx/gamestate*)
 
 ;; (gethash "fogm" (emx/a-state-artcache *emx/gamestate*))
-;; (posframe-delete-all)
