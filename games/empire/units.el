@@ -61,31 +61,36 @@
 (defun emx/a-create-unit ( state archcd playerid piececd x y )
   "Create a new unit, add it to the state"
 
-  (let* ( unit
-	  (ulist (emx/a-state-unitlist state))
-	  (artcache (emx/a-state-artcache state))
-	  (archhash (emx/a-state-archhash state))
-	  piece
-	  arch
-       )
+  ;; verify no other unit present (not currently allowing stacks of doom)
+  (if (emx/a-find-units-at state x y)
+      (print "Attempt to create unit in location already having a unit" *emx/logbuf*)
+    (let* ( unit
+	    (ulist (emx/a-state-unitlist state))
+	    (artcache (emx/a-state-artcache state))
+	    (archhash (emx/a-state-archhash state))
+	    piece
+	    arch
+	  )
 
-    ;; look up the piececd to get the reference
-    (setq piece (gethash piececd artcache))
+      ;; look up the piececd to get the reference
+      (setq piece (gethash piececd artcache))
 
-    ;; look up the archetype to get the reference
-    (setq arch (gethash archcd archhash))
+      ;; look up the archetype to get the reference
+      (setq arch (gethash archcd archhash))
 
-    ;; create the unit
-    (setq unit (emx/a-unit :arch arch :piececd piececd :x x :y y :playerid playerid ))
+      ;; create the unit
+      (setq unit (emx/a-unit :arch arch :piececd piececd :x x :y y :playerid playerid ))
 
-    ;; store in the list
-    (if ulist
-	(push unit (emx/a-state-unitlist state))
-      (setf (emx/a-state-unitlist state) (list unit))
-    )
-    
-    unit
-  ) ; let
+      ;; store in the list
+      (if ulist
+	  (push unit (emx/a-state-unitlist state))
+	(setf (emx/a-state-unitlist state) (list unit))
+      )
+      
+      unit
+    ) ; let
+
+  ) ; if
 
 )
 

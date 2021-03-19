@@ -62,50 +62,54 @@
 (load-file "libpieces.el")
 (load-file "libkeys.el")
 
-;; configuration
-(defvar *emx/gamespath* "games" "path to append to emx/basepath to find where game modules are located")
-(defvar *emx/bufname* "*EmacsAttacks!*" "Emacs Attacks! - buffer name to utilize")
+(defun emx/run-emacs-attacks ()
+  (interactive)
 
-;; logging buffer
-(defvar *emx/logbufname* "*EmacsAttacks! Debug Log*" "Emacs Attacks! - buffer name to utilize for debug log")
-(defvar *emx/logbuf* nil "Emacs Attacks! - the actual debug log buffer")
-;;(setq *emx/logbuf* (generate-new-buffer *emx/logbufname*))
-(setq *emx/logbuf* (get-buffer-create *emx/logbufname*))
-(with-current-buffer *emx/logbufname*
-  (erase-buffer)
-)
+  ;; configuration
+  (defvar *emx/gamespath* "games" "path to append to emx/basepath to find where game modules are located")
+  (defvar *emx/bufname* "*EmacsAttacks!*" "Emacs Attacks! - buffer name to utilize")
 
+  ;; logging buffer
+  (defvar *emx/logbufname* "*EmacsAttacks! Debug Log*" "Emacs Attacks! - buffer name to utilize for debug log")
+  (defvar *emx/logbuf* nil "Emacs Attacks! - the actual debug log buffer")
+  ;;(setq *emx/logbuf* (generate-new-buffer *emx/logbufname*))
+  (setq *emx/logbuf* (get-buffer-create *emx/logbufname*))
+  (with-current-buffer *emx/logbufname*
+    (erase-buffer)
+  )
 
-;; state - surely I'm doing this wrong, having globals like this :)
-(defvar *emx/gamemodes* nil "Emacs Attacks! - list of game modes and particulars about them.")
+  ;; state - surely I'm doing this wrong, having globals like this :)
+  (defvar *emx/gamemodes* nil "Emacs Attacks! - list of game modes and particulars about them.")
 
-;; register available game modes
-(setq *emx/gamemodes* (emx/list-game-modes))
-;; (print *emx/gamemodes*)
-;; (hash-table-count *emx/gamemodes*)
-;; (gethash "Attacks!" *emx/gamemodes*)
+  ;; register available game modes
+  (setq *emx/gamemodes* (emx/list-game-modes))
+  ;; (print *emx/gamemodes*)
+  ;; (hash-table-count *emx/gamemodes*)
+  ;; (gethash "Attacks!" *emx/gamemodes*)
 
-;; define the major mode for the windows
-;; - special-mode is immutable by default
-(define-derived-mode emattacks-mode special-mode "emattacks-mode"
-  "Mode for Emacs Attacks! to use in main game window"
-  (use-local-map emattacks-mode-map) ; doesn't seem to work .. apply it during render I guess :/
-)
+  ;; define the major mode for the windows
+  ;; - special-mode is immutable by default
+  (define-derived-mode emattacks-mode special-mode "emattacks-mode"
+    "Mode for Emacs Attacks! to use in main game window"
+    (use-local-map emattacks-mode-map) ; doesn't seem to work .. apply it during render I guess :/
+  )
 
-;; create initial game state
-(defvar *emx/gamestate* nil "Emacs Attacks! - game state for current game")
-(setq *emx/gamestate* (emx/init-module *emx/gamemodes* "Attacks!"))
-;; (emx/a-state-print *emx/gamestate*)
+  ;; create initial game state
+  (defvar *emx/gamestate* nil "Emacs Attacks! - game state for current game")
+  (setq *emx/gamestate* (emx/init-module *emx/gamemodes* "Attacks!"))
+  ;; (emx/a-state-print *emx/gamestate*)
 
-;; register all the mapscripts we can find for this module (including loading their elisp)
-(defvar *emx/selected-mapscript* nil "Emacs Attacks! - mapscript tp use for current session")
-(setq *emx/selected-mapscript* (emx/register-mapscript-from-file "games/empire" "mapscripts/mapscript-test-1.json"))
+  ;; register all the mapscripts we can find for this module (including loading their elisp)
+  (defvar *emx/selected-mapscript* nil "Emacs Attacks! - mapscript tp use for current session")
+  (setq *emx/selected-mapscript* (emx/register-mapscript-from-file "games/empire" "mapscripts/mapscript-test-1.json"))
 
-;; invoke mapscript(s) to populate the board
-(emx/invoke_mapscript *emx/selected-mapscript* *emx/gamestate*)
-;;(emx/map-script-test-1 (oref *emx/gamestate* board))
+  ;; invoke mapscript(s) to populate the board
+  (emx/invoke_mapscript *emx/selected-mapscript* *emx/gamestate*)
+  ;;(emx/map-script-test-1 (oref *emx/gamestate* board))
 
-;; try and start up/render the actual module
-(emx/start-module *emx/gamestate*)
+  ;; try and start up/render the actual module
+  (emx/start-module *emx/gamestate*)
 
-;; (gethash "fogm" (emx/a-state-artcache *emx/gamestate*))
+  ;; (gethash "fogm" (emx/a-state-artcache *emx/gamestate*))
+
+) ; defun run

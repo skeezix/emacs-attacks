@@ -33,12 +33,15 @@
   "Invoke the module living in the supplied path, expecting a state object back"
   (message "Attacks! module entered; path %s" path)
 
-  (load-file (concat path "/" "state.el"))
-  (load-file (concat path "/" "map.el"))
-  (load-file (concat path "/" "viewport.el"))
-  (load-file (concat path "/" "render.el"))
-  (load-file (concat path "/" "sidepanel.el"))
-  (load-file (concat path "/" "units.el"))
+  ;; do we need to inhale and eval all the code? or have we done it already?
+  (unless (fboundp 'emx/a-create-unit)
+    (load-file (concat path "/" "state.el"))
+    (load-file (concat path "/" "map.el"))
+    (load-file (concat path "/" "viewport.el"))
+    (load-file (concat path "/" "render.el"))
+    (load-file (concat path "/" "sidepanel.el"))
+    (load-file (concat path "/" "units.el"))
+  ) ; unless
 
   (let* ( (config_w 30)
 	  (config_h 30)
