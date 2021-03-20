@@ -29,7 +29,12 @@
   (defvar emattacks-mode-map nil "keymap for Emacs Attacks!")
   (setq emattacks-mode-map (make-sparse-keymap))
   (set-keymap-parent emattacks-mode-map special-mode-map)
-  
+
+  ;; top level
+  (define-key emattacks-mode-map (kbd "q") 'emx/confirm-and-kill)
+
+  ;; TBD: move these into module due to game specific ..
+  ;;
   (define-key emattacks-mode-map (kbd "j") 'next-line)
   (define-key emattacks-mode-map (kbd "k") 'previous-line)
   (define-key emattacks-mode-map (kbd "l") 'emx/point-right)

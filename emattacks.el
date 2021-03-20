@@ -28,7 +28,8 @@
 ;; - re-render after key/function
 ;; - map paint + save mode
 ;; - map loading
-;; - mapscript or two?
+;; - mapscript or two? or gen noise from py?
+;; - buffer-local vars for it all (multiple gaems at once?), or at least multiple viewports could be very handy/neat (unit, focus? spying?)
 ;; - cursor around; select single unit
 ;; - render sprite-list for PC and NPC
 ;; - key actions .. and move game-specific key handling to the game module somewhere
@@ -113,3 +114,10 @@
   ;; (gethash "fogm" (emx/a-state-artcache *emx/gamestate*))
 
 ) ; defun run
+
+(defun emx/confirm-and-kill ()
+  (interactive)
+  (kill-buffer *emx/logbufname*)
+  (kill-buffer *emx/bufname*)
+  (kill-buffer *emx/panelname*)
+)
