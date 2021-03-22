@@ -10,7 +10,7 @@ How to run:
 - Clone the git or otherwise unpack to somewhere
 - Open up emattacks.el
 - M-x eval-buffer
-- .. "game" should be running
+- M-x emx/run-emacs-attacks
 
 What does it do?
 - as of Feb 2021, it just draws a lame map in its buffer, and a fake side-panel, and lets you cursor around
@@ -50,18 +50,25 @@ To Do:
 Detail todo from Feb 2021:
 
 ```elisp
-;; - re-render after key/function
-;; - render sprite-list for PC and NPC
 ;; - cursor around; select single unit
-;; - key actions
-;; - populate side panel correctly per unit
-;; - end of turn handler
+;; - proper documentation directory and link from README
+;; - populate side panel correctly per unit (cursor hovered unit, selected unit, tile, help keys)
+;; - AI object and handlers, basic move scripts
+;; - end of turn handler (iterate across other players AI scripts)
+;; - unit enter unit options and combat resolver
+;; - move archetype definition from el to json for easier modding
+;; - re-render after key/function
 ;; - map paint + save mode
 ;; - map loading
+;; - mapscript or two? or gen noise from py?
+;; - buffer-local vars for it all (multiple gaems at once?), or at least multiple viewports could be very handy/neat (unit, focus? spying?)
+;; - key actions .. and move game-specific key handling to the game module somewhere
+;; - refactor .. code to separation of concern; and why is module defining viewport size? mapscripts hardcoded?..etc
+;; - refactor to ditch the concept of multiple games; keep it simple, its all about the wargame, if we want to do pushem, do a separate package
+;; - add to makefile an image generator (merge enemy0 and player bg with units to emit the assorted unit files)
 ;; - FARM OUT: AI scripts
 ;; - FARM OUT: art
 ;; - FARM OUT: mapscripts
-;; - large map scrolling
 ;; - combat resolution
 ;; - additional units
 ;; - production queue
@@ -72,8 +79,6 @@ Detail todo from Feb 2021:
 ;;   - proper size picker
 ;;   - proper mapscript picker
 ;; - refactor module code to base package code for cross-module mojination
-;; - add hooks? modding methods
-;; - add config functions (paths to modules, mapscripts, pieces, etc..)
-;; - timer to adv-turn + re-render
+;; - refactor ... drop other game modes, all emx; but allow dirs for drop in rule overriders etc? or hooks after units, after turns etc?
 ;; - rectangle select a group of units? or assign units to a name, and select group by name?
 ```

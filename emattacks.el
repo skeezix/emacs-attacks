@@ -21,22 +21,22 @@
 ;;; Code:
 
 ;; TODO
-;; - add units
-;; - render units
-;; - blink option for units, to show selected units etc
+;; - cursor around; select single unit
+;; - proper documentation directory and link from README
+;; - populate side panel correctly per unit (cursor hovered unit, selected unit, tile, help keys)
+;; - AI object and handlers, basic move scripts
+;; - end of turn handler (iterate across other players AI scripts)
+;; - unit enter unit options and combat resolver
 ;; - move archetype definition from el to json for easier modding
 ;; - re-render after key/function
 ;; - map paint + save mode
 ;; - map loading
 ;; - mapscript or two? or gen noise from py?
 ;; - buffer-local vars for it all (multiple gaems at once?), or at least multiple viewports could be very handy/neat (unit, focus? spying?)
-;; - cursor around; select single unit
-;; - render sprite-list for PC and NPC
 ;; - key actions .. and move game-specific key handling to the game module somewhere
 ;; - refactor .. code to separation of concern; and why is module defining viewport size? mapscripts hardcoded?..etc
 ;; - refactor to ditch the concept of multiple games; keep it simple, its all about the wargame, if we want to do pushem, do a separate package
-;; - populate side panel correctly per unit
-;; - end of turn handler
+;; - add to makefile an image generator (merge enemy0 and player bg with units to emit the assorted unit files)
 ;; - FARM OUT: AI scripts
 ;; - FARM OUT: art
 ;; - FARM OUT: mapscripts
@@ -50,9 +50,7 @@
 ;;   - proper size picker
 ;;   - proper mapscript picker
 ;; - refactor module code to base package code for cross-module mojination
-;; - add hooks? modding methods
-;; - add config functions (paths to modules, mapscripts, pieces, etc..)
-;; - timer to adv-turn + re-render
+;; - refactor ... drop other game modes, all emx; but allow dirs for drop in rule overriders etc? or hooks after units, after turns etc?
 ;; - rectangle select a group of units? or assign units to a name, and select group by name?
 ;;
 ;;
