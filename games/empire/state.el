@@ -29,6 +29,9 @@
    (viewport :initarg :viewport :documentation "( x y w h ) of the window to show" :accessor emx/a-state-viewport)
    (unitlist :initarg :unitlist :documentation "A list of emx/a-unit objects" :accessor emx/a-state-unitlist)
    (archhash :initarg :archhash :documentation "A list of emx/a-archetype available for units" :accessor emx/a-state-archhash)
+   ;;
+   (rendercount :documentation "Number of frames rendered; can use it to do even/odd blinking etc" :accessor emx/a-state-rendercount :initform 0)
+   (rendertimer :documentation "The timer that goes off to force a re-render" :accessor emx/a-state-rendertimer)
   )
   "Emacs Attacks! - Attacks! module instance state"
 )

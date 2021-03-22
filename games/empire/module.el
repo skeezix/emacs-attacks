@@ -32,6 +32,7 @@
 (defun emx/a-init-module (path)
   "Invoke the module living in the supplied path, expecting a state object back"
   (message "Attacks! module entered; path %s" path)
+  (print "Entered emx/a-init-module" *emx/logbuf*)
 
   ;; do we need to inhale and eval all the code? or have we done it already?
   (unless (fboundp 'emx/a-create-unit)
@@ -40,6 +41,7 @@
     (load-file (concat path "/" "viewport.el"))
     (load-file (concat path "/" "render.el"))
     (load-file (concat path "/" "sidepanel.el"))
+    (load-file (concat path "/" "archetype.el"))
     (load-file (concat path "/" "units.el"))
   ) ; unless
 
@@ -67,26 +69,21 @@
     (setq archhash (emx/a-load-archetypes))
 
     ;; build a state, assigning in the board and assets
+    (print "emx/a-init-module - create state" *emx/logbuf*)
     (setq state (emx/a-state :board board :guip (display-images-p) :artcache piecehash :viewport vp :unitlist nil :archhash archhash))
 
-    (let ( )
-      (emx/a-create-unit state "tank" 0 "nil" 1 1)
-      (emx/a-create-unit state "tank" 0 "nil" 1 1)
-      (emx/a-create-unit state "tank" 0 "nil" 2 2)
-      (print "unit list" *emx/logbuf*)
-      (print (emx/a-state-unitlist state) *emx/logbuf*)
-      (print "Found unit at 0 0?" *emx/logbuf*)
-      (print (emx/a-find-units-at state 0 0) *emx/logbuf*)
-      (print "Found unit at 1 1?" *emx/logbuf*)
-      (print (emx/a-find-units-at state 1 1) *emx/logbuf*)
-      (print "Found unit at 2 2?" *emx/logbuf*)
-      (print (emx/a-find-units-at state 2 2) *emx/logbuf*)
-    )
+    ;; debug
+    (print "emx/a-init-module - fake up some test units" *emx/logbuf*)
+    (emx/a-create-unit state "tank" 0 "tnkb" 1 1)
+    (emx/a-create-unit state "tank" 0 "tnkr" 2 2)
+    (print "unit list" *emx/logbuf*)
+    (print (emx/a-state-unitlist state) *emx/logbuf*)
 
     ;;(message "Board internal")
     ;;(print board)
 
     ;; return newly init'd state
+    (print "emx/a-init-module - return state" *emx/logbuf*)
     state
   )
   

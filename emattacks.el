@@ -34,6 +34,7 @@
 ;; - render sprite-list for PC and NPC
 ;; - key actions .. and move game-specific key handling to the game module somewhere
 ;; - refactor .. code to separation of concern; and why is module defining viewport size? mapscripts hardcoded?..etc
+;; - refactor to ditch the concept of multiple games; keep it simple, its all about the wargame, if we want to do pushem, do a separate package
 ;; - populate side panel correctly per unit
 ;; - end of turn handler
 ;; - FARM OUT: AI scripts
@@ -69,6 +70,8 @@
   ;; configuration
   (defvar *emx/gamespath* "games" "path to append to emx/basepath to find where game modules are located")
   (defvar *emx/bufname* "*EmacsAttacks!*" "Emacs Attacks! - buffer name to utilize")
+  (defvar *emx/blinkallunits* t "Emacs Attacks! - blink units so terrain tiles can be seen; implies rendering viewport automatically on a timer")
+  (defvar *emx/blinkallunitsdelay* "0.5 sec" "Emacs Attacks! - delay (in seconds) between unit blinks; default is \"0.5 sec\"")
 
   ;; logging buffer
   (defvar *emx/logbufname* "*EmacsAttacks! Debug Log*" "Emacs Attacks! - buffer name to utilize for debug log")
@@ -117,7 +120,27 @@
 
 (defun emx/confirm-and-kill ()
   (interactive)
-  (kill-buffer *emx/logbufname*)
+  ;; (kill-buffer *emx/logbufname*) ; lets not kill this, leave it around for debuggery
+  (cancel-timer (emx/a-state-rendertimer *emx/gamestate*))
   (kill-buffer *emx/bufname*)
   (kill-buffer *emx/panelname*)
+)
+
+(defun emx/force-next-turn ()
+  (interactive)
+  (emx/a-render *emx/gamestate*)
+)
+
+(defun emx/toggle-blinking-units ()
+  "Toggle the timer that alternate blinks units and terrain"
+  (interactive)
+
+  (if *emx/blinkallunits*
+      (setq *emx/blinkallunits* nil)
+    (progn
+      (setq *emx/blinkallunits* t)
+      (emx/a-render *emx/gamestate*)
+    )
+  )
+  
 )

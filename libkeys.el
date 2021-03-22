@@ -32,6 +32,8 @@
 
   ;; top level
   (define-key emattacks-mode-map (kbd "q") 'emx/confirm-and-kill)
+  (define-key emattacks-mode-map (kbd "F") 'emx/force-next-turn)
+  (define-key emattacks-mode-map (kbd "B") 'emx/toggle-blinking-units)
 
   ;; TBD: move these into module due to game specific ..
   ;;

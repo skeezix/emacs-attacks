@@ -51,3 +51,13 @@
   )
 
 )
+
+(defun emx/side-panel-separator ()
+  (let ( (text "") )
+    (setq text (concat text "\n"))
+    (setq text (concat text "\n"))
+    (setq text (concat text "\n"))
+    (setq text (concat text "\n"))
+    text
+  )
+)

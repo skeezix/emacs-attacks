@@ -19,36 +19,39 @@
 
 ;;; Code:
 
-(defun emx/a-render-piece-on-board_OLD (board x y artcache char elsechar)
-  "given a board and (x,y) render the image found there to the current point"
-  (let (id asset cachedimage)
-
-    (setq id (emx/a-map-get-tile board x y))
-    (setq asset (gethash id artcache))
-    ;;(message "%d %d %s" x y id)
-
-    ;; an item in the map .. look it up in the hash?
-    (if asset
-	(progn
-	  (setq cachedimage (cdr (assoc-string "_icon" (assoc-string "rest" (assoc-string "stance" asset)))))
-	  ;;(put-image cachedimage 9999 "*")
-	  ;;(put-image cachedimage (emx/a-map-vecpos board x y) "*")
-	  (insert-image cachedimage char)
-	)
-      (progn
-	(insert elsechar)
-      )
-    )
-    
-  ) ; let
-)
-
-(defun emx/a-render-piece-on-board (board x y artcache char elsechar)
+(defun emx/a-render-piece-on-board (state board x y artcache char elsechar)
   "given a board and (x,y) render the image found there to the current point; supply -1,-1 for 'nil' tile"
 
-  (let* ( (id (if (= -1 x) "nil" (emx/a-map-get-tile board x y)))
-	  (cachedimage (emx/get-pieces-image id))
+  (print "render on board" *emx/logbuf*)
+
+  (let* ( id 
+	  cachedimage
+	  thing
+	  (iseven (cl-evenp (emx/a-state-rendercount state)))
 	)
+
+    (print "is even tick?" *emx/logbuf*)
+    (print iseven *emx/logbuf*)
+    (print (emx/a-state-rendercount state) *emx/logbuf*)
+    
+    ;; what are we rendering? a unit, or a board tile?
+    (setq thing (nth 0 (emx/a-find-units-at state x y)))
+
+    ;; if would render a unit, but we're doing blinking and we're on the even-tick, we just ignore the unit
+    ;; so the tile will be found instead
+    (when (and *emx/blinkallunits* iseven)
+      (setq thing nil)
+    )
+    
+    (if thing
+	(progn
+	  (setq id (emx/a-unit-piececd thing))
+	)
+      (setq id (if (= -1 x) "nil" (emx/a-map-get-tile board x y)))  ; grab the tile art id
+    )
+
+    ;; find the artwork
+    (setq cachedimage (emx/get-pieces-image id))
     
     ;; an item in the map .. look it up in the hash?
     (if cachedimage
@@ -61,6 +64,8 @@
 
 (defun emx/a-render-gui (state)
   ;; (insert "render gui\n")
+
+  (print "render - gui - start" *emx/logbuf*)
 
   (let ( (board (emx/a-state-board state))
 	 (artcache (emx/a-state-artcache state))
@@ -134,7 +139,7 @@
 	  (cl-loop for y from 0 to (1- oy) do
 		   (cl-loop for x from 0 to (1- vpw) do
 			    ;;(message "vporch x %s y %s" x y)
-			    (emx/a-render-piece-on-board board -1 -1 artcache "*" "_")
+			    (emx/a-render-piece-on-board state board -1 -1 artcache "*" "_")
 		   )
 		   (insert "\n")
 	  )
@@ -147,20 +152,20 @@
 		 (when ox
 		   (cl-loop for x from 0 to (1- ox) do
 			    ;;(message "hporch x %s y %s" x y)
-			    (emx/a-render-piece-on-board board -1 -1 artcache "*" "_")
+			    (emx/a-render-piece-on-board state board -1 -1 artcache "*" "_")
 		   )
 		 ) ; when
 
 		 ;; render the cells
 		 (cl-loop for x from 0 to (1- (min vpw mw)) do
 			  ;;(message "tile x %s y %s" x y)
-			  (emx/a-render-piece-on-board board (+ x vpx) (+ y vpy) artcache "*" "_")
+			  (emx/a-render-piece-on-board state board (+ x vpx) (+ y vpy) artcache "*" "_")
 		 )
 
 		 ;; horizontal back porch
 		 (when pw
 		   (cl-loop for x from 0 to (1- pw) do
-			    (emx/a-render-piece-on-board board -1 -1 artcache "*" "_")
+			    (emx/a-render-piece-on-board state board -1 -1 artcache "*" "_")
 		   )
 		 ) ; when
 
@@ -173,7 +178,7 @@
 	  (cl-loop for y from 0 to (1- ph) do
 		   (cl-loop for x from 0 to (1- vpw) do
 			    ;;(message "vporch x %s y %s" x y)
-			    (emx/a-render-piece-on-board board -1 -1 artcache "*" "_")
+			    (emx/a-render-piece-on-board state board -1 -1 artcache "*" "_")
 		   )
 		   (insert "\n")
 	  )
@@ -182,11 +187,15 @@
       ) ; let
     ) ; when
 
+    ;; bump rendercount
+    ;;(print (format "rc %d %d" (emx/a-state-rendercount state) (1+ (emx/a-state-rendercount state))) *emx/logbuf*)
+    (setf (emx/a-state-rendercount state) (1+ (emx/a-state-rendercount state)))
+    
     ;; EARLY EXPERIMENT; works yet very naive and blunt
     (when nil ; render the whole map
       (cl-loop for y from 0 to (1- (emx/a-map-h board)) do
 	       (cl-loop for x from 0 to (1- (emx/a-map-w board)) do
-			(emx/a-render-piece-on-board board x y artcache "*" "_")
+			(emx/a-render-piece-on-board state board x y artcache "*" "_")
 	       )
 	       (insert "\n")
       )
@@ -271,12 +280,17 @@
 
     (setq text "")
     (setq text (concat text (emx/a-describe-status state)))
-    (setq text (concat text "\n"))
-    (setq text (concat text "\n"))
+    (setq text (concat text (emx/side-panel-separator)))
     (setq text (concat text (emx/a-describe-unit state)))
     
     (emx/refresh-side-panel text)
 
   ) ; let
 
+  ;; 'nil' repeat, since we're calling ourselves and can re-schedule the next call then .. ie:
+  ;; this way the player can enable/disable the blinking effect as needed
+  (when *emx/blinkallunits*
+    (setf (emx/a-state-rendertimer state) (run-at-time *emx/blinkallunitsdelay* nil 'emx/a-render state)) ; run-at-time time repeat function &rest args
+  )
+  
 )

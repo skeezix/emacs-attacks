@@ -19,41 +19,19 @@
 
 ;;; Code:
 
-(defclass emx/a-archetype ()
-  (
-   (name      :initarg :name    :type string :documentation "archetypes type name, for reference" :accessor emx/a-archetype-name :initform "")
-  )
-)
-
-(defun emx/a-load-archetypes ()
-
-  (let ( archhash
-	 arch
-       )
-
-    ;; make the hash container
-    (setq archhash (make-hash-table :test 'equal))
-    
-    (setq arch (emx/a-archetype :name "tank"))
-    (puthash "tank" arch archhash)
-
-    archhash
-
-  ) ; let
-  
-)
-
 (defclass emx/a-unit ()
   (
    (playerid  :initarg :playerid :type integer :documentation "identify player id that owns unit" :accessor emx/a-unit-playerid :initform -1)
+   ;;
+   (arch      :initarg :arch    :type emx/a-archetype :documentation "the kind of this unit" :accessor emx/a-unit-arch)
+   (piececd   :initarg :piececd :type string  :documentation "the piece that to use for artwork" :accessor emx/a-unit-piececd :initform "")
+   ;;
    (x         :initarg :x       :type integer :documentation "x coord on map" :accessor emx/a-unit-x :initform 0)
    (y         :initarg :y       :type integer :documentation "y coord on map" :accessor emx/a-unit-y :initform 0)
    ;;(mapid   :initarg :mapid   :type integer :documentation "which map?" :accessor emx/a-unit-mapid :initform -1) ; keep it simple..
    ;;
    (intent    :initarg :intent  :type string  :documentation "intent code" :accessor emx/a-unit-intent :initform "") ; ex: "move"
    (goal      :initarg :goal    :type string  :documentation "a goal value meaningful to the intent code" :accessor emx/a-unit-goal :initform "")  ; target (x,y) for a move, say
-   (piece     :initarg :piececd :type string  :documentation "the piece that to use for artwork" :accessor emx/a-unit-piece :initform "")
-   (arch      :initarg :arch    :type emx/a-archetype :documentation "the kind of this unit" :accessor emx/a-unit-arch)
   )
   "Emacs Attacks! - Unit for player or enemies"
 )
@@ -131,13 +109,12 @@
     (setq text (concat text "  [D]    Destroy unit\n"))
     (setq text (concat text "  [a]    Attack towards point\n"))
     (setq text (concat text "  [m]    Move towards point\n"))
-    (setq text (concat text "\n"))
-    (setq text (concat text "\n"))
-    (setq text (concat text "\n"))
-    (setq text (concat text "\n"))
+    (setq text (concat text (emx/side-panel-separator)))
     (setq text (concat text "  [8]    Scroll viewport up\n"))
     (setq text (concat text "[4] [6]  Scroll viewport left or right\n"))
     (setq text (concat text "  [2]    Scroll viewport down\n"))
+    (setq text (concat text (emx/side-panel-separator)))
+    (setq text (concat text "  [q]    Quit and kill windows/logs\n"))
 
     text
   )
