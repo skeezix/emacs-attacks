@@ -239,8 +239,10 @@
   
 )
 
-(cl-defmethod emx/a-render ( (state emx/a-state) )
-  "Display the board to current buffer"
+(cl-defmethod emx/a-render ( (state emx/a-state) &optional reactive? )
+  "Display the board in STATE to current buffer; if not REACTIVE may schedule blink timer."
+
+  (message "entering emx/a-render")
 
   (let* ( (bufexist? (get-buffer *emx/bufname*))
 	  currpos
@@ -289,7 +291,7 @@
 
   ;; 'nil' repeat, since we're calling ourselves and can re-schedule the next call then .. ie:
   ;; this way the player can enable/disable the blinking effect as needed
-  (when *emx/blinkallunits*
+  (when (and *emx/blinkallunits* (not reactive?))
     (setf (emx/a-state-rendertimer state) (run-at-time *emx/blinkallunitsdelay* nil 'emx/a-render state)) ; run-at-time time repeat function &rest args
   )
   

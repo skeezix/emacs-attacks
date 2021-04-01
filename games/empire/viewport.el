@@ -86,6 +86,6 @@
    
   ) ; let
 
-  (emx/a-render *emx/gamestate*)
+  (emx/a-render *emx/gamestate* t) ; true -> reactive .. this is a redraw based on key, not timer automation
   
 )

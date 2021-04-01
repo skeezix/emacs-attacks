@@ -130,7 +130,7 @@
 )
 
 (defun emx/toggle-blinking-units ()
-  "Toggle the timer that alternate blinks units and terrain"
+  "Enable or disable the blink timer (that alternates rendering of units and terrain)"
   (interactive)
 
   (if *emx/blinkallunits*
